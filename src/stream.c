@@ -604,9 +604,16 @@ uvc_error_t uvc_get_still_ctrl_format_size(
 static int _uvc_stream_params_negotiated(
   uvc_stream_ctrl_t *required,
   uvc_stream_ctrl_t *actual) {
+    if (required->bFormatIndex != actual->bFormatIndex) UVC_DEBUG("Required format: %u, actual format: %u", required->bFormatIndex, actual->bFormatIndex);
+    if (required->bFrameIndex != actual->bFrameIndex) UVC_DEBUG("Required frame index: %u, actual frame index: %u", required->bFrameIndex, actual->bFrameIndex);
+    if (required->dwMaxPayloadTransferSize != actual->dwMaxPayloadTransferSize) UVC_DEBUG("Required MaxPayloadTransferSize: %u, actual MaxPayloadTransferSize: %u", required->dwMaxPayloadTransferSize, actual->dwMaxPayloadTransferSize);
+
+    // return required->bFormatIndex == actual->bFormatIndex &&
+    // required->bFrameIndex == actual->bFrameIndex &&
+    // required->dwMaxPayloadTransferSize == actual->dwMaxPayloadTransferSize;
+
     return required->bFormatIndex == actual->bFormatIndex &&
-    required->bFrameIndex == actual->bFrameIndex &&
-    required->dwMaxPayloadTransferSize == actual->dwMaxPayloadTransferSize;
+    required->bFrameIndex == actual->bFrameIndex;
 }
 
 /** @internal
