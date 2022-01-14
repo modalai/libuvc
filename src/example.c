@@ -22,8 +22,8 @@ void cb(uvc_frame_t *frame, void *ptr) {
     return;
   }
 
-  printf("callback! frame_format = %d, width = %d, height = %d, length = %lu, ptr = %d\n",
-    frame->frame_format, frame->width, frame->height, frame->data_bytes, (int) ptr);
+  printf("callback! frame_format = %d, width = %d, height = %d, length = %lu, ptr = %p\n",
+    frame->frame_format, frame->width, frame->height, frame->data_bytes, ptr);
 
   switch (frame->frame_format) {
   case UVC_FRAME_FORMAT_H264:
@@ -69,13 +69,13 @@ void cb(uvc_frame_t *frame, void *ptr) {
    */
 
   /* Use opencv.highgui to display the image:
-   * 
+   *
    * cvImg = cvCreateImageHeader(
    *     cvSize(bgr->width, bgr->height),
    *     IPL_DEPTH_8U,
    *     3);
    *
-   * cvSetData(cvImg, bgr->data, bgr->width * 3); 
+   * cvSetData(cvImg, bgr->data, bgr->width * 3);
    *
    * cvNamedWindow("Test", CV_WINDOW_AUTOSIZE);
    * cvShowImage("Test", cvImg);
@@ -223,4 +223,3 @@ int main(int argc, char **argv) {
 
   return 0;
 }
-
